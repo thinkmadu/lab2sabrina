@@ -1,3 +1,4 @@
+package main;
 public class AlunoTurma {
     private Aluno nome;
     private Turma turma;
