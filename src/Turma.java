@@ -54,6 +54,9 @@ public class Turma {
 
     //métodos
     public void adicionarAluno(Aluno aluno) {
+        if (aluno == null) {
+          throw new NullPointerException("Aluno não pode ser nulo.");
+        }
         alunos.add(aluno);
-    }
+      }
 }

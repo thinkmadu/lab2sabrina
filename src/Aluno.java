@@ -46,14 +46,26 @@ public class Aluno {
 
     //métodos
     public void adicionarHorario(String disciplina, String horario) {
+        if (disciplina == null || horario == null) {
+          throw new NullPointerException("Argumentos nulos não são permitidos.");
+        }
+        if (!horario.matches("[0-9]{2}:[0-9]{2}")) {
+          throw new IllegalArgumentException("Horário inválido. Utilize o formato HH:MM.");
+        }
         horarios.put(disciplina, horario);
-    }
+      }
 
     public List<Disciplina> disciplinasMatriculadas() {
+        if (turmas == null) {
+          throw new NullPointerException("Turmas não inicializadas.");
+        }
+        if (turmas.isEmpty()) {
+          throw new IndexOutOfBoundsException("Nenhuma turma cadastrada.");
+        }
         List<Disciplina> disciplinas = new ArrayList<>();
         for (AlunoTurma alunoTurma : turmas) {
-            disciplinas.add(alunoTurma.getTurma().getDisciplina());
+          disciplinas.add(alunoTurma.getTurma().getDisciplina());
         }
         return disciplinas;
-    }
+      }
 }

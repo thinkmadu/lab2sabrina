@@ -27,11 +27,11 @@ public class Disciplina {
         this.turmas = turmas;
     }
 
-    public void printQuantidadeAlunos() {
+    public String printQuantidadeAlunos() {
         int totalAlunos = 0;
         for (Turma turma : turmas) {
             totalAlunos += turma.getAlunos().size();
         }
-        System.out.println("\nQuantidade de alunos na disciplina " + this.nome + ": " + totalAlunos);
+        return ("\nQuantidade de alunos na disciplina " + this.nome + ": " + totalAlunos);
     }
 }

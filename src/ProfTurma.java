@@ -26,7 +26,13 @@ public class ProfTurma {
     }
 
     public void printTurmasMinistradas() {
+        if(professor == null){
+            throw new NullPointerException("Professor não cadastrado");
+        }
         System.out.println("Turmas ministradas pelo professor " + professor.getNome() + ":");
         System.out.println(turma.getNome());
+        
+        
+        
     }
 }
