@@ -4,10 +4,7 @@ import java.util.ArrayList;
 
 public class ProfTurma {
     private Professor professor;
-// private Turma turma;
     private ArrayList<Turma> listaTurmas;
-
-    
 
     //construtor
     public ProfTurma(Professor professor) {
@@ -47,14 +44,17 @@ public class ProfTurma {
         this.listaTurmas.add(turma);
        }
 
-    public void printTurmasMinistradas() {
+       public String turmasMinistradas() {
         if(professor == null){
             throw new NullPointerException("Professor não cadastrado");
         }
-        System.out.println("Turmas ministradas pelo professor " + professor.getNome() + ":");
+        StringBuilder turmasTotais = new StringBuilder();
+        turmasTotais.append("Turmas ministradas pelo professor ").append(professor.getNome()).append(":\n");
         for (Turma turma : listaTurmas) {
-            System.out.println(turma.getNome());
+            turmasTotais.append("\nTurma: ").append(turma.getNome())
+                        .append("\nDisciplina: ").append(turma.getDisciplina().getNome())
+                        .append("\nHorário: ").append(turma.getHorario()).append("\n");
         }
-               
+        return turmasTotais.toString();
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class AlunoTurma {
     private Aluno aluno;
-   // private Turma turma;
     private ArrayList<Turma> listaTurmas;
 
     public AlunoTurma(Aluno aluno) {
@@ -26,14 +25,19 @@ public class AlunoTurma {
         this.listaTurmas.add(turma);
     }
 
-    public void printAulas() {
+    public String aulas() {
         if(aluno.getMatricula() == null){
             throw new NullPointerException("Aluno não cadastrado");
         }
-        System.out.println("Turmas do aluno " + aluno.getNome() + ":");
+        StringBuilder todasAulas = new StringBuilder();
+        todasAulas.append("Turmas do aluno ").append(aluno.getNome()).append(":\n");
         for (Turma turma : listaTurmas) {
-            System.out.println(turma.getNome() + ": " + turma.getDisciplina().getNome() + ", " + turma.getHorario());
+            todasAulas.append("\nTurma: ").append(turma.getNome())
+                      .append("\nDisciplina: ").append(turma.getDisciplina().getNome())
+                      .append("\nHorário: ").append(turma.getHorario()).append("\n");
         }
+        todasAulas.append("\n");
+        return todasAulas.toString();
     }
 
 }

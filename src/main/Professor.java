@@ -1,14 +1,10 @@
 package main;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 public class Professor {
     private String nome;
     private String matricula;
     private ProfTurma horarios;
-    //private Map<String, String> horarios = new HashMap<>();
 
     //construtor
     public Professor(String nome, String matricula){
