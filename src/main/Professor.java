@@ -22,15 +22,7 @@ public class Professor {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    // public List<ProfTurma> getTurmas() {
-    //     return horarios;
-    // }
-
-    // public void setTurmas(List<ProfTurma> horarios) {
-    //     this.horarios = horarios;
-    // }
-
+    
     public String getMatricula() {
         return matricula;
     }
@@ -40,25 +32,30 @@ public class Professor {
     }
 
     public ProfTurma getHorarios() {
-        return horarios;
+        try {
+          if (horarios == null) {
+            throw new NullPointerException("Variável 'horarios' não inicializada.");
+          }
+          
+          if (!(horarios instanceof ProfTurma)) {
+            throw new ClassCastException("Variável 'horarios' não é do tipo 'ProfTurma'.");
+          }
+          
+          return horarios;
+        } catch (NullPointerException e) {
+          System.err.println("Erro: " + e.getMessage());
+          return null;
+        } catch (ClassCastException e) {
+          System.err.println("Erro: " + e.getMessage());
+          return null;
+        }
+      }
+    
+    public void setHorarios(ProfTurma horarios) {
+    	this.horarios = horarios;
     }
+      
     
-    // public String getHorario(String disciplina) {
-    //     return horarios.get(disciplina);
-    // }
-
-    //métodos
-    
-      // public void adicionarHorario(String disciplina, String horario) {
-      //   if (disciplina == null || horario == null) {
-      //     throw new NullPointerException("Argumentos nulos não são permitidos.");
-      //   }
-      //   if (!horario.matches("[0-9]{2}:[0-9]{2}")) {
-      //     throw new IllegalArgumentException("Horário inválido. Utilize o formato HH:MM.");
-      //   }
-      //   horarios.put(disciplina, horario);
-      // }
-
 
     
 }

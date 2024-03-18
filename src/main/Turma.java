@@ -31,17 +31,11 @@ public class Turma {
         return nome;
     }
 
-    // public void setNome(String nome) {
-    //     this.nome = nome;
-    // }
 
     public List<Aluno> getAlunos() {
         return alunos;
     }
 
-    // public void setAlunos(List<Aluno> alunos) {
-    //     this.alunos = alunos;
-    // }
 
     public Professor getProfessor() {
         return professor;
@@ -55,31 +49,32 @@ public class Turma {
         return disciplina;
     }
 
-    // public void setDisciplina(Disciplina disciplina) {
-    //     this.disciplina = disciplina;
-    //     }
     
     public String getHorario() {
         return horario;
     }
-
-    // public void setHorario(String horario) {
-    //     this.horario = horario;
-    // }    
+   
 
     //métodos
-    public void adicionarAluno(Aluno aluno) {
+    public void adicionarAluno(Aluno aluno) throws IllegalArgumentException {
+        if (aluno == null) {
+            throw new NullPointerException("Aluno não pode ser nulo.");
+        }
+
         if (aluno.getNome() == null || aluno.getMatricula() == null) {
             throw new NullPointerException("Nome e matrícula não podem ser nulos.");
         }
-        
-        for(Turma turma : disciplina.getTurmas())
-            if (turma.getAlunos().contains(aluno)){
+
+        for (Turma turma : disciplina.getTurmas()) {
+            if (turma.getAlunos().contains(aluno)) {
                 throw new IllegalArgumentException("Aluno já cadastrado na disciplina.");
             }
-        
+        }
+
         alunos.add(aluno);
         aluno.getAlunoTurma().addTurma(this);
-      }
+    }
+
+      
 
 }

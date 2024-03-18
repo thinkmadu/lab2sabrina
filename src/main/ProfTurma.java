@@ -24,37 +24,40 @@ public class ProfTurma {
         return listaTurmas;
     }
 
-    // public Turma getTurma() {
-    //     return turma;
-    // }
-
-    // public void setTurma(Turma turma) {
-    //     this.turma = turma;
-    // }
-
-     public void adicionarTurma(Turma turma) {
-         if (turma == null) {
-           throw new NullPointerException("Turma não pode ser nula.");
-         }
-
-       else if (turma.getProfessor() != null) {
-          throw new IllegalArgumentException("Turma já possui professor.");
+    public void adicionarTurma(Turma turma) throws NullPointerException, IllegalArgumentException {
+        if (turma == null) {
+            throw new NullPointerException("Turma não pode ser nula.");
         }
-         turma.setProfessor(professor);
+
+        if (turma.getProfessor() != null) {
+            throw new IllegalArgumentException("Turma já possui professor.");
+        }
+
+        turma.setProfessor(professor);
         this.listaTurmas.add(turma);
-       }
-
-       public String turmasMinistradas() {
-        if(professor == null){
-            throw new NullPointerException("Professor não cadastrado");
-        }
-        StringBuilder turmasTotais = new StringBuilder();
-        turmasTotais.append("Turmas ministradas pelo professor ").append(professor.getNome()).append(":\n");
-        for (Turma turma : listaTurmas) {
-            turmasTotais.append("\nTurma: ").append(turma.getNome())
-                        .append("\nDisciplina: ").append(turma.getDisciplina().getNome())
-                        .append("\nHorário: ").append(turma.getHorario()).append("\n");
-        }
-        return turmasTotais.toString();
     }
+      
+
+      public String turmasMinistradas() {
+        try {
+          if (professor == null) {
+            throw new NullPointerException("Professor não cadastrado");
+          }
+          
+          StringBuilder turmasTotais = new StringBuilder();
+          turmasTotais.append("Turmas ministradas pelo professor ").append(professor.getNome()).append(":\n");
+          
+          for (Turma turma : listaTurmas) {
+            turmasTotais.append("\nTurma: ").append(turma.getNome())
+              .append("\nDisciplina: ").append(turma.getDisciplina().getNome())
+              .append("\nHorário: ").append(turma.getHorario()).append("\n");
+          }
+          
+          return turmasTotais.toString();
+        } catch (NullPointerException e) {
+          System.err.println("Erro ao obter turmas ministradas: " + e.getMessage());
+          return "";
+        }
+      }
+      
 }

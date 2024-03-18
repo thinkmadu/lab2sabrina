@@ -28,34 +28,58 @@ public class Disciplina {
     //     this.turmas = turmas;
     // }
 
-    public void addTurmaNaDisciplina(Turma turma){
-        if (turma == null){
+    public void addTurmaNaDisciplina(Turma turma) {
+        try {
+          if (turma == null) {
             throw new NullPointerException("Turma não pode ser nula");
-        }
-        else if (turmas.contains(turma)){
+          }
+          
+          if (turmas.contains(turma)) {
             throw new IllegalArgumentException("Turma já cadastrada");
+          }
+          
+          turmas.add(turma);
+        } catch (NullPointerException e) {
+          System.err.println("Erro ao adicionar turma: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+          System.err.println("Erro ao adicionar turma: " + e.getMessage());
         }
-        turmas.add(turma);
-    }
+      }
+      
 
-    public String qtdAlunos() {
-        int totalAlunos = 0;
-        for (Turma turma : turmas) {
+      public String qtdAlunos() {
+        try {
+          int totalAlunos = 0;
+          for (Turma turma : turmas) {
             totalAlunos += turma.getAlunos().size();
+          }
+          
+          return ("\nQuantidade de alunos na disciplina " + this.nome + ": " + totalAlunos);
+        } catch (NullPointerException e) {
+          System.err.println("Erro ao obter quantidade de alunos: " + e.getMessage());
+          return "";
         }
-        return ("\nQuantidade de alunos na disciplina " + this.nome + ": " + totalAlunos);
-    }
+      }
+      
 
-    public String alunos(){
-        StringBuilder todosAlunos = new StringBuilder();
-        todosAlunos.append("\nAlunos da disciplina " + this.nome + ":\n");
-        for (Turma turma : turmas){
-            todosAlunos.append("Turma: "+ turma.getNome() + "\n");
-            for(Aluno aluno : turma.getAlunos()){
-                todosAlunos.append(aluno.getNome() + " "+ aluno.getMatricula()+"\n");
+      public String alunos() {
+        try {
+          StringBuilder todosAlunos = new StringBuilder();
+          todosAlunos.append("\nAlunos da disciplina " + this.nome + ":\n");
+          
+          for (Turma turma : turmas) {
+            todosAlunos.append("Turma: " + turma.getNome() + "\n");
+            for (Aluno aluno : turma.getAlunos()) {
+              todosAlunos.append(aluno.getNome() + " " + aluno.getMatricula() + "\n");
             }
             todosAlunos.append("\n");
+          }
+          
+          return todosAlunos.toString();
+        } catch (NullPointerException e) {
+          System.err.println("Erro ao obter lista de alunos: " + e.getMessage());
+          return "";
         }
-        return todosAlunos.toString();
-    }
+      }
+      
 }
