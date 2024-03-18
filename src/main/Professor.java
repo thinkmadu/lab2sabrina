@@ -7,14 +7,15 @@ import java.util.Map;
 public class Professor {
     private String nome;
     private String matricula;
-    private List<ProfTurma> turmas;
-    private Map<String, String> horarios = new HashMap<>();
+    private ProfTurma horarios;
+    //private Map<String, String> horarios = new HashMap<>();
 
     //construtor
     public Professor(String nome, String matricula){
+        
         this.nome = nome;
         this.matricula = matricula;
-        this.turmas = new ArrayList<>();
+        this.horarios = new ProfTurma(this);
     }
 
     //gets e sets
@@ -26,13 +27,13 @@ public class Professor {
         this.nome = nome;
     }
 
-    public List<ProfTurma> getTurmas() {
-        return turmas;
-    }
+    // public List<ProfTurma> getTurmas() {
+    //     return horarios;
+    // }
 
-    public void setTurmas(List<ProfTurma> turmas) {
-        this.turmas = turmas;
-    }
+    // public void setTurmas(List<ProfTurma> horarios) {
+    //     this.horarios = horarios;
+    // }
 
     public String getMatricula() {
         return matricula;
@@ -42,25 +43,26 @@ public class Professor {
         this.matricula = matricula;
     }
 
-    public String getHorario(String disciplina) {
-        return horarios.get(disciplina);
+    public ProfTurma getHorarios() {
+        return horarios;
     }
+    
+    // public String getHorario(String disciplina) {
+    //     return horarios.get(disciplina);
+    // }
 
     //métodos
-    public void adicionarTurma(Turma turma) {
-        ProfTurma profTurma = new ProfTurma(this, turma);
-        this.turmas.add(profTurma);
-    }
+    
+      // public void adicionarHorario(String disciplina, String horario) {
+      //   if (disciplina == null || horario == null) {
+      //     throw new NullPointerException("Argumentos nulos não são permitidos.");
+      //   }
+      //   if (!horario.matches("[0-9]{2}:[0-9]{2}")) {
+      //     throw new IllegalArgumentException("Horário inválido. Utilize o formato HH:MM.");
+      //   }
+      //   horarios.put(disciplina, horario);
+      // }
 
-    public void adicionarHorario(String disciplina, String horario) {
-        horarios.put(disciplina, horario);
-    }
 
-
-    public void printTurmasMinistradas() {
-        System.out.println("\nTurmas ministradas pelo professor " + this.getNome() + ":");
-        for (ProfTurma profTurma : turmas) {
-            System.out.println(profTurma.getTurma().getNome());
-        }
-    }
+    
 }
