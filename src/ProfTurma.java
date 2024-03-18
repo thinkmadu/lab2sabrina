@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class ProfTurma {
     private Professor professor;
     private Turma turma;
@@ -25,8 +27,24 @@ public class ProfTurma {
         this.turma = turma;
     }
 
-    public void printTurmasMinistradas() {
-        System.out.println("Turmas ministradas pelo professor " + professor.getNome() + ":");
-        System.out.println(turma.getNome());
+    public void printTurmasCadastradas(List<ProfTurma> profTurmas) {
+  try {
+    if (profTurmas == null || profTurmas.isEmpty()) {
+      System.out.println("Nenhuma turma cadastrada.");
+      return;
     }
+    
+    System.out.println("Turmas cadastradas:");
+    for (ProfTurma profTurma : profTurmas) {
+      Professor professor = profTurma.getProfessor();
+      if (professor != null) {
+        System.out.println("- Professor: " + professor.getNome() + ", Turma: " + profTurma.getTurma().getNome());
+      } else {
+        System.out.println("- Turma sem professor associado: " + profTurma.getTurma().getNome());
+      }
+    }
+  } catch (NullPointerException e) {
+    System.err.println("Erro ao imprimir turmas cadastradas: " + e.getMessage());
+  }
+}
 }

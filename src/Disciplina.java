@@ -27,11 +27,23 @@ public class Disciplina {
         this.turmas = turmas;
     }
 
-    public void printQuantidadeAlunos() {
+    public String printQuantidadeAlunos() {
         int totalAlunos = 0;
-        for (Turma turma : turmas) {
-            totalAlunos += turma.getAlunos().size();
+        try {
+          if (turmas == null || turmas.isEmpty()) {
+            return "Nenhuma turma cadastrada para esta disciplina.";
+          }
+          
+          for (Turma turma : turmas) {
+            if (turma != null && turma.getAlunos() != null) {
+              totalAlunos += turma.getAlunos().size();
+            } else {
+              System.err.println("Erro: Turma nula ou lista de alunos nula para turma " + turma);
+            }
+          }
+        } catch (NullPointerException e) {
+          System.err.println("Erro ao calcular quantidade de alunos: " + e.getMessage());
         }
-        System.out.println("\nQuantidade de alunos na disciplina " + this.nome + ": " + totalAlunos);
-    }
+        return ("\nQuantidade de alunos na disciplina " + this.nome + ": " + totalAlunos);
+      }
 }
