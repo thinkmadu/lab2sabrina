@@ -1,5 +1,7 @@
 package test;
+
 import static org.junit.Assert.*;
+import main.Creator;
 import main.Turma;
 import main.Disciplina;
 import main.Professor;
@@ -16,15 +18,15 @@ public class TesteTurma {
 
     @Before
     public void setUp() {
-        disciplina = new Disciplina("Matemática");
-        professor = new Professor("João", "12345");
-        turma = new Turma("Turma A", professor, "Segunda-feira 10:00", disciplina);
+        disciplina = Creator.criarDisciplina("Matemática");
+        professor = Creator.criarProfessor("João", "12345");
+        turma = Creator.criarTurma("Turma A", professor, "Segunda-feira 10:00", disciplina);
     }
 
     @Test
     public void testAdicionarAluno() {
-        Aluno aluno1 = new Aluno("Alice", "98765");
-        Aluno aluno2 = new Aluno("Bob", "54321");
+        Aluno aluno1 = Creator.criarAluno("Alice", "98765");
+        Aluno aluno2 = Creator.criarAluno("Bob", "54321");
 
         turma.adicionarAluno(aluno1);
         turma.adicionarAluno(aluno2);
@@ -40,9 +42,8 @@ public class TesteTurma {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAdicionarAlunoExistente() {
-        Aluno aluno1 = new Aluno("Alice", "98765");
+        Aluno aluno1 = Creator.criarAluno("Alice", "98765");
         turma.adicionarAluno(aluno1);
         turma.adicionarAluno(aluno1);
     }
-
 }

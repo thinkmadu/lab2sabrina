@@ -9,57 +9,50 @@ package main;
 public class ControleAcademico {
     public static void main(String[] args) {
 
-       Disciplina disciplina1 = new Disciplina("Física");
-       Disciplina disciplina2 = new Disciplina("Português");
-       Disciplina disciplina3 = new Disciplina("Filosofia");
+      Disciplina disciplina1 = Creator.criarDisciplina("Física");
+      Disciplina disciplina2 = Creator.criarDisciplina("Português");
+      Disciplina disciplina3 = Creator.criarDisciplina("Filosofia");
+      
+      Professor professor1 = Creator.criarProfessor("Boris", "5555");
+      Professor professor2 = Creator.criarProfessor("Clarice", "5432");
+      Professor professor3 = Creator.criarProfessor("Kevin", "7222");
+
+       Turma turma1 = Creator.criarTurma("Turma 1 de Física", professor1, "8:00", disciplina1);
+       Turma turma2 = Creator.criarTurma("Turma 1 de Português", professor2, "10:00", disciplina2);
+       Turma turma3 = Creator.criarTurma("Turma 1 de Filosofia", professor3, "14:00", disciplina3);
+       Turma turma4 = Creator.criarTurma("Turma 2 de Filosofia", professor1, "16:00", disciplina3);
+
+       professor1.getHorarios().adicionarTurma(turma1);
+       professor1.getHorarios().adicionarTurma(turma4); 
+      
+       Aluno josefa = Creator.criarAluno("Josefa", "56456456");
+       Aluno joao = Creator.criarAluno("João", "12345678");
+       Aluno pedro = Creator.criarAluno("Pedro", "56789012");
+       Aluno juliana = Creator.criarAluno("Juliana", "87654321");
+       Aluno roberto = Creator.criarAluno("Roberto", "76543210");
+       Aluno fernanda = Creator.criarAluno("Fernanda", "65432109");
+       Aluno rafael = Creator.criarAluno("Rafael", "54321098");
+       Aluno carlos = Creator.criarAluno("Carlos", "34567890");
+       Aluno ana = Creator.criarAluno("Ana", "45678901");
+
+       turma1.adicionarAluno(josefa);
+       turma1.adicionarAluno(joao);
+       turma1.adicionarAluno(pedro);
        
-       Professor professor1 = new Professor("Boris","5555");
-       Professor professor2 = new Professor("Clarice","5432");
-       Professor professor3 = new Professor("Kevin","7222");
+       turma2.adicionarAluno(josefa);
+       turma2.adicionarAluno(juliana);
+       turma2.adicionarAluno(roberto);
+       turma2.adicionarAluno(fernanda);
+       turma2.adicionarAluno(rafael);
+       
+       turma3.adicionarAluno(josefa);
+       turma3.adicionarAluno(carlos);
+       turma3.adicionarAluno(ana);
 
-        Turma turma1 = new Turma("Turma 1 de Física", "8:00", disciplina1);
-        Turma turma2 = new Turma("Turma 1 de Português",professor2, "10:00", disciplina2);
-        Turma turma3 = new Turma("Turma 1 de Filosofia",professor1, "14:00", disciplina3);
-        Turma turma4 = new Turma("Turma 2 de Filosofia", "16:00", disciplina3);
-
-        professor1.getHorarios().adicionarTurma(turma1);
-        professor3.getHorarios().adicionarTurma(turma4); 
-        
-        Aluno josefa = new Aluno("Josefa", "56456456");
-        Aluno joao = new Aluno("João", "12345678");
-        Aluno pedro = new Aluno("Pedro", "56789012");
-        Aluno juliana = new Aluno("Juliana", "87654321");
-        Aluno roberto = new Aluno("Roberto", "76543210");
-        Aluno fernanda = new Aluno("Fernanda", "65432109");
-        Aluno rafael = new Aluno("Rafael", "54321098");
-        Aluno carlos = new Aluno("Carlos", "34567890");
-        Aluno ana = new Aluno("Ana", "45678901");
-        
-
-        // turma 1 3 alunos
-        turma1.adicionarAluno(josefa);
-        turma1.adicionarAluno(joao);
-        turma1.adicionarAluno(pedro);
-       // turma1.adicionarAluno(pedro); // aluno repetido
-        
-       //turma 2 5 alunos
-        turma2.adicionarAluno(josefa);
-        turma2.adicionarAluno(juliana);
-        turma2.adicionarAluno(roberto);
-        turma2.adicionarAluno(fernanda);
-        turma2.adicionarAluno(rafael);
-        
-        //turma 3 3 alunos
-        turma3.adicionarAluno(josefa);
-        turma3.adicionarAluno(carlos);
-        turma3.adicionarAluno(ana);
-
-        //turma 4 4 alunos
-        //turma4.adicionarAluno(josefa); // josefa ja ta na disciplina
-        turma4.adicionarAluno(juliana);
-        turma4.adicionarAluno(roberto);
-        turma4.adicionarAluno(fernanda);
-        turma4.adicionarAluno(rafael);
+       turma4.adicionarAluno(juliana);
+       turma4.adicionarAluno(roberto);
+       turma4.adicionarAluno(fernanda);
+       turma4.adicionarAluno(rafael);
         
         // é pra josefa ta nas turmas 1 de física, 1 de português, 1 de filosofia e 2 de filosofia 
         System.out.println(josefa.getAlunoTurma().aulas());

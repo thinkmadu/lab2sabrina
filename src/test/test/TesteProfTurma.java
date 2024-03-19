@@ -1,12 +1,14 @@
 package test;
+
 import static org.junit.Assert.*;
+import main.Creator;
 import main.ProfTurma;
 import main.Professor;
 import main.Turma;
 import main.Disciplina;
+
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
 
 public class TesteProfTurma {
     private ProfTurma profTurma;
@@ -16,10 +18,13 @@ public class TesteProfTurma {
 
     @Before
     public void setUp() {
-        professor = new Professor("João", "12345");
-        profTurma = new ProfTurma(professor);
-        turma1 = new Turma("Turma A", "Segunda-feira 10:00", new Disciplina("Matemática"));
-        turma2 = new Turma("Turma B", "Quarta-feira 14:00", new Disciplina("Física"));
+        // Criando professor usando o padrão Creator
+        professor = Creator.criarProfessor("João", "12345");
+        profTurma = Creator.criarProfTurma(professor);
+
+        // Criando turmas usando o padrão Creator
+        turma1 = Creator.criarTurma("Turma A", professor, "Segunda-feira 10:00", Creator.criarDisciplina("Matemática"));
+        turma2 = Creator.criarTurma("Turma B", professor, "Quarta-feira 14:00", Creator.criarDisciplina("Física"));
     }
 
     @Test
@@ -36,9 +41,13 @@ public class TesteProfTurma {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAdicionarTurmaComProfessor() {
-        turma2.setProfessor(new Professor("Maria", "54321"));
-        profTurma.adicionarTurma(turma2);
+    public void testAdicionarTurmaComProfessorDiferente() {
+        // Cria um novo professor diferente
+        Professor outroProfessor = Creator.criarProfessor("Maria", "54321");
+        // Cria uma nova turma com o professor diferente
+        Turma turmaComOutroProfessor = Creator.criarTurma("Turma B", outroProfessor, "Quarta-feira 14:00", Creator.criarDisciplina("Física"));
+
+        profTurma.adicionarTurma(turmaComOutroProfessor);
     }
 
     @Test
@@ -52,6 +61,4 @@ public class TesteProfTurma {
 
         assertEquals(resultadoEsperado, profTurma.turmasMinistradas());
     }
-
-    // Você pode adicionar mais testes conforme necessário
 }

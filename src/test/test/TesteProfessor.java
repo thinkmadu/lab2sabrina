@@ -1,9 +1,10 @@
 package test;
 
+import main.Creator;
 import main.Professor;
+
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class TesteProfessor {
@@ -12,7 +13,8 @@ public class TesteProfessor {
 
     @Before
     public void setUp() {
-        professor = new Professor("Ana Carolina", "422222");
+        // Criando professor usando o padrão Creator
+        professor = Creator.criarProfessor("Ana Carolina", "422222");
     }
 
     @Test
@@ -39,8 +41,4 @@ public class TesteProfessor {
 
         assertEquals(tamanhoEsperado, tamanhoAtual);
     }
-    
-
-  
-
 }

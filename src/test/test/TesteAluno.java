@@ -1,6 +1,8 @@
 package test;
 import main.Aluno;
 import main.AlunoTurma;
+import main.Creator;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,11 +10,11 @@ import static org.junit.Assert.*;
 
 public class TesteAluno {
 
-    private Aluno aluno1;
+    private Aluno aluno1 = Creator.criarAluno("Paulo", "4545");
 
     @Before
     public void setUp() {
-        aluno1 = new Aluno("Paulo", "4545");
+
     }
 
     @Test
